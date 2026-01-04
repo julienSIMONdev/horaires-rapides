@@ -17,11 +17,11 @@ const App = () => {
   const [tokenClient, setTokenClient] = useState(null);
 
   const horaires = [
-    { id: 1, debut: '08:00', fin: '16:10', label: '8h00 - 16h10', color: '#E91E63', bgColor: '#FCE4EC' },
-    { id: 2, debut: '08:30', fin: '16:40', label: '8h30 - 16h40', color: '#9C27B0', bgColor: '#F3E5F5' },
-    { id: 3, debut: '08:40', fin: '17:00', label: '8h40 - 17h00', color: '#FF9800', bgColor: '#FFF3E0' },
-    { id: 4, debut: '09:00', fin: '17:10', label: '9h00 - 17h10', color: '#00BCD4', bgColor: '#E0F7FA' },
-    { id: 5, debut: null, fin: null, label: 'Récup', color: '#4CAF50', bgColor: '#E8F5E9', isRecup: true },
+    { id: 1, debut: '08:00', fin: '16:10', label: '8h00 - 16h10', calendarTitle: '8h-16h10', color: '#E91E63', bgColor: '#FCE4EC', colorId: '4' },
+    { id: 2, debut: '08:30', fin: '16:40', label: '8h30 - 16h40', calendarTitle: '8h30-16h40', color: '#9C27B0', bgColor: '#F3E5F5', colorId: '3' },
+    { id: 3, debut: '08:40', fin: '17:00', label: '8h40 - 17h00', calendarTitle: '8h40-17h', color: '#FF9800', bgColor: '#FFF3E0', colorId: '6' },
+    { id: 4, debut: '09:00', fin: '17:10', label: '9h00 - 17h10', calendarTitle: '9h-17h10', color: '#00BCD4', bgColor: '#E0F7FA', colorId: '7' },
+    { id: 5, debut: null, fin: null, label: 'Récup', calendarTitle: 'Récup', color: '#4CAF50', bgColor: '#E8F5E9', isRecup: true, colorId: '2' },
   ];
 
   const joursSemaine = ['Lun', 'Mar', 'Mer', 'Jeu', 'Ven'];
@@ -222,19 +222,18 @@ const App = () => {
         let event;
         if (horaire.isRecup) {
           event = {
-            summary: 'Récupération',
-            description: 'Journée de récupération',
+            summary: horaire.calendarTitle,
             start: {
               date: dateKey,
             },
             end: {
               date: `${year}-${month}-${String(parseInt(day) + 1).padStart(2, '0')}`,
             },
+            colorId: horaire.colorId,
           };
         } else {
           event = {
-            summary: `Travail ${horaire.label}`,
-            description: 'Horaire de travail',
+            summary: horaire.calendarTitle,
             start: {
               dateTime: `${dateKey}T${horaire.debut}:00`,
               timeZone: 'Europe/Paris',
@@ -243,6 +242,7 @@ const App = () => {
               dateTime: `${dateKey}T${horaire.fin}:00`,
               timeZone: 'Europe/Paris',
             },
+            colorId: horaire.colorId,
           };
         }
 
