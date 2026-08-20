@@ -288,8 +288,6 @@ const App = () => {
       padding: '20px',
     }}>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Playfair+Display:wght@600&display=swap');
-        
         * {
           box-sizing: border-box;
         }
